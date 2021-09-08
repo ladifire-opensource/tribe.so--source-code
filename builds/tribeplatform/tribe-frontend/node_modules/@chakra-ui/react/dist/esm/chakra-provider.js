@@ -1,0 +1,28 @@
+import CSSReset from "@chakra-ui/css-reset";
+import { PortalManager } from "@chakra-ui/portal";
+import { ColorModeProvider, GlobalStyle, ThemeProvider } from "@chakra-ui/system";
+import defaultTheme from "@chakra-ui/theme";
+import * as React from "react";
+
+/**
+ * The global provider that must be added to make all Chakra components
+ * work correctly
+ */
+export var ChakraProvider = props => {
+  var {
+    children,
+    colorModeManager,
+    portalZIndex,
+    resetCSS = true,
+    theme = defaultTheme
+  } = props;
+  return /*#__PURE__*/React.createElement(ThemeProvider, {
+    theme: theme
+  }, /*#__PURE__*/React.createElement(ColorModeProvider, {
+    colorModeManager: colorModeManager,
+    options: theme.config
+  }, resetCSS && /*#__PURE__*/React.createElement(CSSReset, null), /*#__PURE__*/React.createElement(GlobalStyle, null), portalZIndex ? /*#__PURE__*/React.createElement(PortalManager, {
+    zIndex: portalZIndex
+  }, children) : children));
+};
+//# sourceMappingURL=chakra-provider.js.map
